@@ -16,7 +16,7 @@ ui <- fluidPage(
   
   ##titlePanel(paste("Stratified estimation of map accuracy", version)), p(),
   
-  titlePanel(title=div(img(src="logo.png", width="90"), paste("Stratified estimation of map accuracy", version))),
+  titlePanel(title=div(img(src="logo.png", width="90"), paste("Stratified estimation of map accuracy", version)), windowTitle = 'Map accuracy'),
   p('Earth Observation Lab | Geography Department | Humboldt-University of Berlin'),
  # tags$style(type='text/css', ".selectize-input { font-size: 12px; line-height: 14px;} .selectize-dropdown { font-size: 12px; line-height: 14px; }"),
   
