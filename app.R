@@ -10,14 +10,11 @@ source("firstup.R")
 
 cit <- "Stehman, S. V., 2014. Estimating area and map accuracy for stratified random sampling when the strata are different from the map classes. Int. J. Remote Sens. 35, 4923–4939."
 version <- "(0.1 alpha)"
-disclaimer <- 'The Software and code samples available on this website are provided "as is" without warranty of any kind, either express or implied. Use at your own risk.'
+disclaimer <- 'Disclaimer: The Software and code samples available on this website are provided "as is" without warranty of any kind, either express or implied. Use at your own risk.'
 
 ui <- fluidPage(
   
   titlePanel(paste("Stratified estimation of map accuracy", version)),
-
-  p(disclaimer),
-  p(cit),
   
  # tags$style(type='text/css', ".selectize-input { font-size: 12px; line-height: 14px;} .selectize-dropdown { font-size: 12px; line-height: 14px; }"),
   
@@ -43,11 +40,11 @@ ui <- fluidPage(
         p(),
         tableOutput(outputId='outConfusionMatrix'),
         tableOutput(outputId='outAreaEstimates'),
-        plotOutput(outputId='outAccuracyPlot'),
-        downloadButton("downloadMatrixAdjusted", "Export confusion matrix"),
-        downloadButton("downloadStats", "Export statistics")
+        downloadButton("downloadMatrixAdjusted", "Export adjusted confusion matrix"), 
+        downloadButton("downloadStats", "Export statistics"), p(),
+        plotOutput(outputId='outAccuracyPlot')
      )
-  )
+  ),    p(cit),  p(strong(disclaimer))
 )
 
 

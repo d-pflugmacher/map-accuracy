@@ -2,8 +2,8 @@ require(ggplot2)
 require(tidyr)
 
 aa_plot <- function(aaStats){
-  tmp1 <- gather(aaStats[,c('class', 'ua', 'pa')], src, accuracy, -class)
-  tmp2 <- gather(aaStats[,c('class', 'ua_se', 'pa_se')], src, se, -class)
+  tmp1 <- tidyr::gather(aaStats[,c('class', 'ua', 'pa')], src, accuracy, -class)
+  tmp2 <- tidyr::gather(aaStats[,c('class', 'ua_se', 'pa_se')], src, se, -class)
   tmp2$src <- gsub('_se', '', tmp2$src)
   result <- merge(tmp1, tmp2)
   result$se_low <- result$accuracy - result$se
@@ -12,7 +12,7 @@ aa_plot <- function(aaStats){
   result$src <- gsub('ua', "User's accuracy", result$src)
   
   p <- ggplot(result, aes(class, accuracy, fill=src)) + 
-    geom_bar(stat="identity") +
+    geom_bar(stat="identity", position=position_dodge(.9)) +
     xlab('Class') + ylab('Accuracy') +
     # coord_flip() + # scale_y_continuous(limits=c(0, 0.8)) +
     scale_y_continuous(breaks=seq(0,1,0.2), limits=c(0, 1)) +
