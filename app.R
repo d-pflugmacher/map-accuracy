@@ -14,8 +14,10 @@ disclaimer <- 'Disclaimer: The Software and code samples available on this websi
 
 ui <- fluidPage(
   
-  titlePanel(paste("Stratified estimation of map accuracy", version)),
+  ##titlePanel(paste("Stratified estimation of map accuracy", version)), p(),
   
+  titlePanel(title=div(img(src="logo.png", width="90"), paste("Stratified estimation of map accuracy", version))),
+  p('Earth Observation Lab | Geography Department | Humboldt-University of Berlin'),
  # tags$style(type='text/css', ".selectize-input { font-size: 12px; line-height: 14px;} .selectize-dropdown { font-size: 12px; line-height: 14px; }"),
   
  sidebarLayout(
@@ -36,7 +38,7 @@ ui <- fluidPage(
     ),
     mainPanel(
         tableOutput(outputId='outConfusionMatrixRaw'),
-        textOutput(outputId='txtOverallAccuracy'),
+        strong(textOutput(outputId='txtOverallAccuracy')),
         p(),
         tableOutput(outputId='outConfusionMatrix'),
         tableOutput(outputId='outAreaEstimates'),
@@ -44,7 +46,9 @@ ui <- fluidPage(
         downloadButton("downloadStats", "Export statistics"), p(),
         plotOutput(outputId='outAccuracyPlot')
      )
-  ),    p(cit),  p(strong(disclaimer))
+  ),    
+ p(cit),  
+ p(strong(disclaimer))
 )
 
 
@@ -147,13 +151,13 @@ server <- function(input, output, session) {
     })
 
   output$outConfusionMatrix <- renderTable(
-    rownames = T, bordered=T, striped=T, na='', spacing='xs', caption='Adjusted confusion matrix',
+    rownames = T, bordered=T, striped=T, na='', spacing='xs', caption='Adjusted confusion matrix', digits=3,
     {
       if (!is.null(aaResults())) return(aa_confusion_matrix_bind(aaResults(), proportion = T))
     })
   
   output$outAreaEstimates <- renderTable(
-    bordered=T, striped=T, na='', spacing='xs', caption='Adjusted accuracy and area stats',
+    bordered=T, striped=T, na='', spacing='xs', caption='Adjusted accuracy and area stats', digits=3,
     {
       if (!is.null(aaStats())) return(aaStats())
     })
