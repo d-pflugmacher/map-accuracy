@@ -5,6 +5,7 @@
 #' @param ref reference sample vector
 #' @param map map sample vector
 #' @param prob selection probabilties
+#' @param collapse remove empty rows/columns if TRUE
 #' @return confusion matrix
 #' @author Dirk Pflugmacher
 #' @export
